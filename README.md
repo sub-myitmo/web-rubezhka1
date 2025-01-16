@@ -1,16 +1,10 @@
 # web-rubezhka1
 
 <details>
-<summary><h4>
-<ol>
-<li>DHTML и AJAX - основные принципы, сходства и различияDHTML и AJAX - основные принципы, сходства и различия</li>
-<li>Основные проблемы, возникающие при параллельной обработке JSP и способы их решения</li>
-<li>JS-функция ???</li>
-</ol>
-</h4></summary>
-<ul>
+<summary>
+  <h4>DHTML и AJAX - основные принципы, сходства и различияDHTML и AJAX - основные принципы, сходства и различия</h4>
+</summary>
 
-<li>
 DHTML (Dynamic HTML) и AJAX (Asynchronous JavaScript and XML) являются двумя технологиями, используемыми для создания интерактивных веб-приложений. Они имеют сходства, но также отличаются друг от друга.
 
 Основные принципы DHTML:
@@ -36,9 +30,13 @@ DHTML (Dynamic HTML) и AJAX (Asynchronous JavaScript and XML) являются 
 2. AJAX требует использования XMLHttpRequest объекта, в то время как DHTML не требует этого компонента.
 3. DHTML может быть использован для создания сложных пользовательских интерфейсов, тогда как AJAX часто используется для загрузки данных из базы данных или других ресурсов без полной перезагрузки страницы.
 
-</li>
+</details>
 
-<li>
+<details>
+<summary>
+  <h4>Основные проблемы, возникающие при параллельной обработке JSP и способы их решения</h4>
+</summary>
+
 Одной из основных проблем при параллельной обработке JSP является конкуренция за доступ к ресурсам, таким как база данных, файловая система и другие внешние сервисы. Это может привести к блокировкам и задержкам в обработке запросов.
 
 Для решения этой проблемы можно использовать механизмы синхронизации, такие как блокировки или семафоры, чтобы предотвратить одновременный доступ к ресурсам. Также можно использовать асинхронные запросы для выполнения длительных операций без блокировки основного потока обработки.
@@ -51,13 +49,6 @@ DHTML (Dynamic HTML) и AJAX (Asynchronous JavaScript and XML) являются 
 
 Для улучшения производительности можно использовать кэширование результатов вычислений, распределение нагрузки между несколькими серверами или оптимизацию кода и запросов к базе данных. Также можно использовать асинхронную обработку запросов для уменьшения времени ожидания ответа от сервера.
 
-</li>
-
-<li>
-
-</li>
-
-</ul>
 </details>
 
 
@@ -65,15 +56,9 @@ DHTML (Dynamic HTML) и AJAX (Asynchronous JavaScript and XML) являются 
 
 <details>
 <summary><h4>
-<ol>
-<li>Основы HTTP запроса</li>
-<li>Promise в JavaScript</li>
-<li>Написать сервлет, который пренапраляет любой запрос на страницу http://yandex.ru</li>
-</ol>
+Основы HTTP запроса
 </h4></summary>
-<ul>
 
-<li>
 HTTP (Hypertext Transfer Protocol) - это протокол передачи данных, который используется для обмена информацией в Интернете. HTTP запросы отправляются клиентом (например, браузером) к серверу для запроса определенной информации или выполнения определенного действия.
 
 Основные элементы HTTP запроса включают:
@@ -95,9 +80,16 @@ Accept-Language: en-US
 ```
 
 В этом примере "GET" - это метод запроса, "/index.html" - это URL ресурса на сервере и "Host", "User-Agent", "Accept-Language" - это заголовки запросов.
-</li>
 
-<li>
+</details>
+
+<details>
+<summary><h4>
+
+Promise в JavaScript
+
+</h4></summary>
+
 Promise в JavaScript - это объект, который используется для выполнения асинхронных операций и управления их результатами. Он представляет собой обещание о том, что определенная операция будет завершена в будущем, либо успешно (resolve), либо неудачно (reject).
 
 Promise имеет три состояния: 
@@ -129,35 +121,30 @@ promise.then((message) => {
 В этом примере создается новый Promise объект с задержкой в две секунды. Если операция завершается успешно, то вызывается метод resolve с сообщением "Operation successful", если нет - метод reject с сообщением "Operation failed". Затем мы используем метод then для обработки успешного выполнения и метод catch для отлавливания ошибок.
 
 Promise является мощным инструментом для работы с асинхронными операциями в JavaScript и широко используется в различных библиотеках и фреймворках.
-</li>
 
-<li>
+
+</details>
+
+<details>
+<summary><h4>
+Написать сервлет, который пренапраляет любой запрос на страницу http://yandex.ru
+
+</h4></summary>
+
 Для написания сервлета, который будет перенаправлять любой запрос на страницу http://yandex.ru, вам нужно использовать метод sendRedirect из класса HttpServletResponse. Вот пример кода на Java для сервлета:
 
 ```
-@WebServlet("/redirect")
+@WebServlet("/*")
 public class RedirectServlet extends HttpServlet {
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String redirectUrl = "http://yandex.ru";
-        response.sendRedirect(redirectUrl);
+    @Override
+    protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.sendRedirect("http://yandex.ru");
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request, response);
-    }
 }
 ```
 
-В этом примере:
 
-1. @WebServlet("/redirect") указывает на путь, по которому сервлет будет доступен.
-2. doGet метод перенаправляет запросы GET на страницу http://yandex.ru с помощью sendRedirect.
-3. doPost метод перенаправляет запросы POST также на страницу http://yandex.ru, используя тот же код, что и для GET.
-
-После развертывания этого сервлета на вашем сервере Java EE, все запросы по адресу /redirect будут автоматически перенаправляться на http://yandex.ru.
-</li>
-
-</ul>
 </details>
 
 
